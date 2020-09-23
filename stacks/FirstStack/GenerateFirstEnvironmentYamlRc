@@ -1,0 +1,14 @@
+
+source overcloudrc
+
+cat >FirstStackEnvironment.yaml << EOF
+---
+resource_registry:
+    "OS::Nova::Server::FirstStack": ./FirstStack.yaml
+
+parameter_defaults:
+    NetID: $(openstack network list | awk '/ private / { print $2 }') 
+
+### How to rung? ###
+## openstack stack create  -t FirstStack.yaml -e FirstStackEnvironment.yaml StackName ###
+EOF

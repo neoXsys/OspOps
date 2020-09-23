@@ -1,0 +1,33 @@
+heat_template_version: 2015-10-15
+description: Launch a basic instance with CirrOS image using the
+             ``m1.nano`` flavor, ``stackrc`` key,  and one network.
+
+parameters:
+  NetID:
+    type: string
+    description: Network ID to use for the instance.
+
+resources:
+  server:
+    type: OS::Nova::Server
+    properties:
+      image: cirros
+      flavor: m1.nano
+      key_name: stackrc
+      ### Export NetID If you are not passing environment file | export NET_ID=$(openstack network list | awk '/ private / { print $2 }') ###
+      networks: 
+      - network: { get_param: NetID }
+      user_data: |
+        #!/bin/bash
+        sudo touch ~/PowerOfUserdata	
+
+outputs:
+  instance_name:
+    description: Name of the instance.
+    value: { get_attr: [ server, name ] }
+  instance_ip:
+    description: IP address of the instance.
+    value: { get_attr: [ server, first_address ] }
+
+### How to run? ###
+## openstack stack create -t demo-template.yml --parameter "NetID=$NET_ID" stack

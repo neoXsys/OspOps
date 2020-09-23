@@ -1,11 +1,17 @@
 #!/bin/bash
 
+### TODO: Define Global Variable ###
+
 ### Import overcloudrc file for admin project
 source ~/overcloudrc
 
 ### Crate Public Network
 openstack network create public  --external --provider-physical-network datacentre  --provider-network-type flat
-openstack subnet create public-subnet   --no-dhcp --network public --subnet-range 10.0.0.0/24   --allocation-pool start=10.0.0.100,end=10.0.0.200    --gateway 10.0.0.1 --dns-nameserver 8.8.8.8
+
+### Public / Eternal Network Depends on you DC Fabric / Underlay Network and change IP Range as per the configuration
+## openstack subnet create public-subnet  --no-dhcp --network public --subnet-range 192.0.2.0/24  --allocation-pool start=192.0.2.150,end=192.0.2.200  --gateway 192.0.2.254 --dns-nameserver 8.8.8.8
+
+openstack subnet create public-subnet --no-dhcp --network public --subnet-range 10.0.0.0/24 --allocation-pool start=10.0.0.100,end=10.0.0.200  --gateway 10.0.0.1 --dns-nameserver 8.8.8.8
 
 ### Create Private Network
 openstack network create private

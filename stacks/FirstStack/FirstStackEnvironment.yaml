@@ -1,0 +1,9 @@
+---
+resource_registry:
+    "OS::Nova::Server::FirstStack": ./FirstStack.yaml
+
+parameter_defaults:
+    NetID: 60c4b731-7221-47b8-ab93-2a75344097c2 
+
+### How to rung? ###
+## openstack stack create  -t FirstStack.yaml -e FirstStackEnvironment.yaml StackName ###
