@@ -19,7 +19,7 @@ parameters:
   network:
     type: string
     description: project network to attach instance to
-    default: internal
+    default: private
   external_network:
     type: string
     description: network used for floating IPs

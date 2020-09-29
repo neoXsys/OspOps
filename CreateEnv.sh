@@ -15,7 +15,7 @@ openstack subnet create public-subnet --no-dhcp --network public --subnet-range 
 
 ### Create Private Network
 openstack network create private
-openstack subnet create private-subnet --network private --dns-nameserver 8.8.4.4 --gateway 172.16.1.1 --subnet-range 172.16.1.0/24
+openstack subnet create private-subnet --network private --dns-nameserver 172.16.1.1 --gateway 172.16.1.1 --subnet-range 172.16.1.0/24
 
 ### Create Router
 openstack router create router1
@@ -39,7 +39,7 @@ openstack security group rule create --dst-port 22 --proto tcp $(openstack secur
 openstack image create cirros --file cirros-0.4.0-x86_64-disk.img --disk-format qcow2 --container-format bare
 
 ### Spawn Cirros Instance
-openstack server create test-instance --flavor m1.nano --image $(openstack image list -f value -c ID | head -1) --network $(openstack network show private -f value -c id)
+openstack server create test-instance --flavor m1.nano --image $(openstack image list -f value -c ID | head -1) --network $(openstack network show private -f value -c id) --key-name $(openstack keypair list -f value -c Name)
 
 ### What's going on?
 openstack server list
