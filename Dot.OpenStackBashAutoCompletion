@@ -1,0 +1,4 @@
+# How to enable bash autocompletion feature for openstack client? | https://access.redhat.com/solutions/3893841
+sudo sh -c 'rpm -q bash-completion > /dev/null 2>&1 && openstack complete > /usr/share/bash-completion/completions/openstack'
+source  /usr/share/bash-completion/completions/openstack
+
