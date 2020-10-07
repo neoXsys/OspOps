@@ -15,7 +15,7 @@ openstack subnet create public-subnet --no-dhcp --network public --subnet-range 
 
 ### Create Private Network
 openstack network create private
-openstack subnet create private-subnet --network private --dns-nameserver 172.16.1.1 --gateway 172.16.1.1 --subnet-range 172.16.1.0/24
+openstack subnet create private-subnet --network private --dns-nameserver 8.8.4.4 --gateway 172.16.1.1 --subnet-range 172.16.1.0/24
 
 ### Create Router
 openstack router create router1

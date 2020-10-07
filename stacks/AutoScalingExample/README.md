@@ -1,6 +1,8 @@
 # Auto Scalling Demo
-## How to run ?
-```openstack stack create  -t template.yaml -e environment.yaml AutoScallingDemo```
+## How to run for RHOSP 13?
+```openstack stack create  -t  template-osp13.yaml -e environment.yaml AutoScallingDemo```
+## How to run for RHOSP 16.1?
+```openstack stack create  -t  template-osp161.yaml -e environment.yaml AutoScallingDemo```
 ## How to scale up instances (Auto Scalling)?
 ```
 ssh cirros@_EXTERNAL_IP_OF_INSTANCE_
@@ -14,5 +16,5 @@ ssh cirros@_EXTERNAL_IP_OF_INSTANCE
 sudo killall dd
 ```
 ## Reference Document
-[AUTO SCALING FOR INSTANCES](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/auto_scaling_for_instances/index)
-
+[RHOSP 13: AUTO SCALING FOR INSTANCES](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/auto_scaling_for_instances/index)
+[RHOSP 16.1: AUTO SCALING FOR INSTANCES](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.1/html-single/auto_scaling_for_instances/index)
