@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## $1 - Script input from OSP Undercloud Node UUID / Name after introspection (openstack baremetal node list)
 
