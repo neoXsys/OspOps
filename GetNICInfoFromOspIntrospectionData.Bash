@@ -15,8 +15,9 @@ fi
 
 for NICName in $(openstack baremetal introspection interface list ${1} -f value -c Interface) 
   do
-    LinkStatus=$(openstack baremetal introspection data save ${1} | jq '.extra.network["'${NICName}'"].link') 
-    echo ${1} $(openstack baremetal node show ${1} -f value  -c name) ${NICName} ${LinkStatus}
+    LinkStatus=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].link') 
+    MACId=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].serial')
+    echo ${1} $(openstack baremetal node show ${1} -f value  -c name) ${NICName} ${LinkStatus} ${MACId}
 done
 
 exit 0
