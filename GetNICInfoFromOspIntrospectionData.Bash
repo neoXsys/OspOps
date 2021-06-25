@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+### Author: Hardik 'Hardy' Dalwadi | hdalwadi-|at|-redhat-|dot|-com
 ## $1 - Script input from OSP Undercloud Node UUID / Name after introspection (openstack baremetal node list)
 
 ## Source OSP Undercloud RC file
