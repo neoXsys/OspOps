@@ -9,16 +9,24 @@ source ~/stackrc
 if [ $# -eq 0 ]
   then
   echo "No arguments supplied"
-  echo "Single Argument: OSP Undercloud Node UUID or Name (openstack baremetal node list)"
-  echo "${0} controller-1"
-  exit 1 
+  echo "Single Argument: OSP Undercloud Node UUID or Name From (openstack baremetal node list)"
+  openstack baremetal node list
+  echo "Usage: ${0} controller-1/UUID"
+  exit 1
 fi
 
-for NICName in $(openstack baremetal introspection interface list ${1} -f value -c Interface) 
+echo "BaremetalName/UUID BaremetalName/UUID NICName LinkStatus MacID BusInfo Vendor Product Firmware Driver Speed"
+for NICName in $(openstack baremetal introspection interface list ${1} -f value -c Interface)
   do
-    LinkStatus=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].link') 
+    LinkStatus=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].link')
     MACId=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].serial')
-    echo ${1} $(openstack baremetal node show ${1} -f value  -c name) ${NICName} ${LinkStatus} ${MACId}
+    BUSINFO=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].businfo')
+    VENDOR=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].vendor')
+    PRODUCT=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].product')
+    FIRMWARE=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].firmware')
+    DRIVER=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].driver')
+    SPEED=$(openstack baremetal introspection data save ${1} | jq -r '.extra.network["'${NICName}'"].speed')
+    echo ${1} $(openstack baremetal node show ${1} -f value  -c name) ${NICName} ${LinkStatus} ${MACId} ${BUSINFO} ${VENDOR} ${PRODUCT} ${FIRMWARE} ${DRIVER} ${SPEED}
 done
 
 exit 0
