@@ -1,0 +1,12 @@
+- Install tmux package if missing & get the Jump Server / Bastion Host home directory prompt
+- Set the global history to record 500000 Buffer lines from tmux
+  - echo "set -g history-limit 500000" >> ~/.tmux.conf # 
+- Create new session
+  - tmux new -s UpgradeApplication
+- Inside Tmux, Use the following to detach the session:
+  - ctrl B, d
+- Re-Attached Session:
+  - tmux a -t UpgradeApplication
+- Use the following command after every detachment of the session to record the tmux session pane logging, remember, it will only record the tmux pane from where you did the detach
+  - tmux capture-pane -pS - >> ~/tmux-buffer-`date +%Y%m%d`.txt # Append the same day file 
+  - tmux capture-pane -pS - > ~/tmux-buffer-`date +%Y%m%dT%H%M%S`.txt # Create new file after every detachment of tmux session pan
