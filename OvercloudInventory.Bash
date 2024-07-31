@@ -17,3 +17,7 @@ STACK_NAME=$(openstack stack list -f value -c "Stack Name"  --sort-column "Stack
 
 ## Dynamically generate inventory (json format) to ansible (Example: ansible -i $0 all -m ping) 
 exec /usr/bin/tripleo-ansible-inventory --stack ${STACK_INPUT} --list
+
+
+## NOTE: Inventory has been generated for RHOSP 17.1 Onwards at ~/overcloud-deploy 
+ansible -i /home/stack/overcloud-deploy/dev-cloud/config-download/dev-cloud/tripleo-ansible-inventory.yaml all -m ping
