@@ -11,6 +11,7 @@ openstack flavor delete m1.nano
 openstack router unset router1 --external-gateway
 openstack router remove subnet router1 private-subnet
 openstack router delete router1
+openstack port delete cirros-port-1
 openstack subnet delete private-subnet
 openstack network delete private
 openstack subnet delete public-subnet
